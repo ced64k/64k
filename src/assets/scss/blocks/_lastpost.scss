@@ -1,0 +1,31 @@
+.lastpost {
+	position: relative;
+	display: block;
+	h3 {
+		font-size: 48px;
+	}
+	img {
+		display: block;
+		width: 100%;
+	}
+	.txt {
+		padding: 30px;
+		background: rgba(0,0,0,.4);
+		position: absolute;
+		bottom: 0;
+		left: 30px;
+		width: 50%;
+		backdrop-filter: blur(5px);
+		border-top-left-radius: 40px;
+	}
+	.img {
+		overflow: hidden;
+		height: 500px;
+	}
+	p {
+		font-size: 18px;
+	}
+	.excerpt {
+		margin: 15px 0 0;
+	}
+}

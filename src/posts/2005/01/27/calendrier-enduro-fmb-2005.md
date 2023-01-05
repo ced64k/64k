@@ -1,0 +1,34 @@
+---
+title: "Calendrier Enduro FMB 2005"
+date: 2005-01-27
+permalink: 2005/01/27/calendrier-enduro-fmb-2005/
+author: Ced
+tags: ["post"]
+legacy_wordpress_id: 7
+---
+
+<ul> <li>6 mars - __WARNANT__</li> </ul> 
+
+[MC Molignard](mailto:%6a%61%63%71%75%65%73%2e%66%6f%72%73%65%69%6c%6c%65%73%40%73%6b%79%6e%65%74%2e%62%65) - Alex Lison - 071/77.01.01
+
+<!-- excerpt -->
+
+ <ul> <li>13 mars - __ORP LE GRAND__</li> </ul> 
+
+AMC Orp le Grand - [Robert Gysembergh](mailto:%72%2e%67%79%73%65%6d%62%65%72%67%68%40%62%65%6c%67%61%63%6f%6d%2e%6e%65%74) - 019/63.53.25
+
+ <ul> <li>3 avril  - __FLORENNES__</li> </ul> 
+
+[Dinant MC](mailto:%64%69%6e%61%6e%74%2e%6d%6f%74%6f%2e%63%6c%75%62%40%62%75%73%6d%61%69%6c%2e%6e%65%74) - Ernest Viroux - 0476/20.98.40
+
+ <ul> <li>24 avril - __SAINT-HUBERT__</li> </ul> 
+
+TCCA - Charles Lecomte - 061/22.33.54
+
+ <ul> <li>1 mai - __GEMBLOUX__ *</li> <li>28 août - __DINANT__</li> </ul> 
+
+[Dinant MC](mailto:%64%69%6e%61%6e%74%2e%6d%6f%74%6f%2e%63%6c%75%62%40%62%75%73%6d%61%69%6c%2e%6e%65%74) - Ernest Viroux - 0476/20.98.40
+
+ <ul> <li>4 septembre - __BASSENGE__ *</li> <li>25 septembre - __LEOPOLDSBOURG__</li> <li>30 octobre - __HAUTRAGE__</li> </ul> 
+
+(* sous réserve)
