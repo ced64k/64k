@@ -3,11 +3,12 @@
     <div class="site-foot__inner">
       <nav id="footernav" class="site-foot__inner">
         {% set activePage = page.url | url %}
-        &copy; {% year %} <a href="/" {% if activePage === '/' %} aria-current="page" {% endif %}>{{ meta.siteName }}</a>
+        &copy; {% year %} &nbsp;<a href="/" {% if activePage === '/' %} aria-current="page" {% endif %}>{{ meta.siteName }}</a>
 
         {% for item in navigation.bottom %}
 
         <a
+          style="display: none"
           href="{{ item.url }}"
           {{
           helpers.getLinkActiveState(item.url,
@@ -21,7 +22,7 @@
         {% endfor %}
       </nav>
 
-      <div id="social" class="site-foot__inner">
+      <div id="social" class="site-foot__inner" style="display: none">
         {% for item in social %}
         <a href="{{ item.url }}">
           <span class="sr-only">{{ item.platform }}</span>

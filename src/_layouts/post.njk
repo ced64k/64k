@@ -73,7 +73,7 @@ preloads:
             {%- endif %}
 
 
-            <img alt="" src="http://1.gravatar.com/avatar/d7a973c7dab26985da5f961be7b74480?s=120&amp;d=mm&amp;r=g" class="avatar avatar-120 photo" width="120" height="120"><span class="fn">{{ comment.comment_author }}</span><span class="screen-reader-text says">says:</span>
+            <img alt="" src="http://1.gravatar.com/avatar/d7a973c7dab26985da5f961be7b74480?s=120&amp;d=mm&amp;r=g" class="avatar avatar-120 photo" width="120" height="120"><span class="fn"></span><span class="screen-reader-text says">says:</span>
 
 
             {%- if comment.comment_author_url %}
@@ -82,9 +82,12 @@ preloads:
 
 
 
+
+
                        </div><!-- .comment-author -->
 
           <div class="comment-metadata">
+{{ comment.comment_author }}<br>
             <a href="http://64k.test/2019/12/28/bonjour-tout-le-monde/#comment-1">
                               <time datetime="2019-12-28T21:36:36+01:00" title="28 décembre 2019 at 21 h 36 min">
                 {{ comment.comment_date }}              </time>
