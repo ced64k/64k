@@ -5,6 +5,7 @@ description: ""
 permalink: 2005/02/02/recette-des-crepes/
 author: Soph
 tags: ["post","cuisine"]
+featured: 'crepes.jpg'
 legacy_wordpress_id: 12
 ---
 
