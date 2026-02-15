@@ -1,16 +1,9 @@
-# Misc
-*.log
-npm-debug.*
-*.scssc
-*.log
-*.swp
-.DS_Store
-Thumbs.db
-.sass-cache
-.env
+_site/
+node_modules/
 .cache
 
-# Node modules and output
-node_modules
-dist
-src/_includes/css
+# Compiled CSS (generated from SCSS)
+css/index.css
+css/index.css.map
+css/message-box.css
+css/prism-diff.css

@@ -1,0 +1,73 @@
+@use 'variables' as *;
+
+.site-foot {
+  padding: 20px;
+  background: #B2B72A;
+  color: #fff;
+  border-top: 2px solid #fff;
+  .wrapper {
+    padding-right: 30px;
+  }
+}
+
+.site-foot__inner {
+  //display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: center;
+  width: 100%;
+  
+  svg {
+    height: 1em;
+    width: 1em;
+  }
+}
+
+.skip-link {
+  clip: rect(1px, 1px, 1px, 1px);
+  display: block;
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  top: 1rem;
+  left: 1rem;
+  z-index: 999;
+  
+  &:focus {
+    clip: auto;
+    height: auto;
+    overflow: visible;
+    width: auto;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    line-height: 1;
+  }
+  
+  &:not(:focus) {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: auto;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border-width: 0;
+}

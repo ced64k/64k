@@ -1,0 +1,52 @@
+@use 'variables' as *;
+
+#main {
+  max-width: 1360px;
+  margin: 0 auto;
+}
+
+.main_inner {
+  @media only screen and (min-width: 992px) {
+    //padding-top: 30px;
+  }
+}
+
+.flow {
+  margin-bottom: 40px;
+}
+
+.wrapper {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 30px 15px;
+  
+  @media only screen and (min-width: 992px) {
+    padding: 30px 30px;
+    padding-right: 400px;
+  }
+}
+
+.region {
+  //padding-top: var(--region-space-top, 30px);
+  padding-bottom: var(--region-space-bottom, 30px);
+}
+
+/* Content */
+.content {
+  --wrapper-max-width: 75rem;
+  display: grid;
+  grid-template-columns: 1fr min(48ch, 100%) 1fr;
+  
+  > * {
+    grid-column: 2;
+  }
+  
+  .breakout {
+    width: 100%;
+    grid-column: 1/4;
+  }
+}
+
+.flow > * + * {
+  margin-top: var(--flow-space, 1em);
+}

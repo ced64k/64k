@@ -1,0 +1,80 @@
+@use 'variables' as *;
+@use 'sass:color';
+
+/* Comments section */
+.comments {
+	margin-top: 3rem;
+	padding-top: 2rem;
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
+	font-size: 16px;
+	h2 {
+		margin-bottom: 1.5rem;
+		font-size: 1.5rem;
+		color: $color-light;
+	}
+}
+
+.comment {
+	margin-bottom: 2rem;
+	padding: 1.25rem;
+	background-color: rgba(255, 255, 255, 0.05);
+	border-left: 3px solid $green;
+	border-radius: 4px;
+	transition: all $transition-base;
+	
+	&:hover {
+		background-color: rgba(255, 255, 255, 0.08);
+		border-left-color: color.adjust($green, $lightness: 10%);
+	}
+	
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.comment-header {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: baseline;
+	gap: 0.5rem;
+	margin-bottom: 0.75rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.comment-author {
+	font-weight: 600;
+	color: $color-light;
+	
+	a {
+		color: $green;
+		text-decoration: none;
+		transition: color $transition-base;
+		
+		&:hover {
+			color: color.adjust($green, $lightness: 15%);
+			text-decoration: underline;
+		}
+	}
+}
+
+.comment-header time {
+	font-size: 0.875rem;
+	color: rgba(255, 255, 255, 0.6);
+	font-style: italic;
+}
+
+.comment-content {
+	line-height: 1.6;
+	color: rgba(255, 255, 255, 0.9);
+	word-wrap: break-word;
+	
+	p {
+		margin-bottom: 0.75rem;
+		
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}

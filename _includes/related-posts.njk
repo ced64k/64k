@@ -1,0 +1,41 @@
+{# Get the first tag from the current post #}
+{%- set currentTags = tags | filterTagList %}
+{%- if currentTags.length > 0 %}
+{%- set currentTag = currentTags[0] %}
+
+{# Find all posts with the same tag, excluding the current post #}
+{%- set relatedPosts = collections[currentTag] | reverse %}
+{%- set filteredRelatedPosts = [] %}
+{%- for post in relatedPosts %}
+  {%- if post.url != page.url and filteredRelatedPosts.length < 3 %}
+    {%- set filteredRelatedPosts = (filteredRelatedPosts.push(post), filteredRelatedPosts) %}
+  {%- endif %}
+{%- endfor %}
+
+{# Display related posts if any found #}
+{%- if filteredRelatedPosts.length > 0 %}
+<aside class="related-posts">
+  <h3>Articles similaires</h3>
+  <div class="related-posts-grid">
+    {%- for post in filteredRelatedPosts %}
+    <div class="card card-small">
+      <div class="card_inner">
+        {%- if post.data.featured %}
+        {%- set postImage = post | getFeaturedImagePath %}
+        <div class="featured">
+          <img src="{{ postImage }}" alt="{{ post.data.title }}" loading="lazy" decoding="async">
+        </div>
+        {%- endif %}
+        <div class="txt">
+          <h4><a href="{{ post.url }}">{{ post.data.title }}</a></h4>
+          <div class="meta">
+            <div class="date">{{ post.data.date | readableDate("dd/MM/yyyy") }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {%- endfor %}
+  </div>
+</aside>
+{%- endif %}
+{%- endif %}

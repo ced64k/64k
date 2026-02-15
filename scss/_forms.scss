@@ -1,0 +1,70 @@
+@use 'variables' as *;
+@use 'sass:color';
+
+// Forms styling
+form {
+  max-width: 600px;
+  
+  p {
+    margin-bottom: 1.5rem;
+    
+    &.hidden {
+      display: none;
+    }
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #fff;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    
+    &:focus {
+      outline: none;
+      border-color: $green;
+    }
+    
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 150px;
+  }
+  
+  button[type="submit"] {
+    background: $green;
+    color: #000;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+    
+    &:hover {
+      background: color.adjust($green, $lightness: 10%);
+    }
+    
+    &:active {
+      transform: translateY(1px);
+    }
+  }
+}

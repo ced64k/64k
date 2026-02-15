@@ -1,183 +1,116 @@
-# Eleventy Excellent
+# eleventy-base-blog v9
 
-Opiniated but easy to use Eleventy starter, based on the workflow suggested by Andy Bell's [buildexcellentwebsit.es](https://buildexcellentwebsit.es/).
+A starter repository showing how to build a blog with the [Eleventy](https://www.11ty.dev/) site generator (using the [v3.0 release](https://github.com/11ty/eleventy/releases/tag/v3.0.0)).
 
-If you end up using this starter, feel free to send me a link, I'd love to see it!
-Also let me know if you miss any features. Currently in planning: automatically generated OpenGraph images (as fallback) and dark mode.
+## Getting Started
 
-- [Eleventy Excellent](#eleventy-excellent)
-  - [Preview](#preview)
-  - [Features](#features)
-  - [First steps](#first-steps)
-  - [Deploy directly to Netlify](#deploy-directly-to-netlify)
-  - [Development](#development)
-    - [Install dependencies](#install-dependencies)
-    - [Working locally](#working-locally)
-    - [Creating a production build](#creating-a-production-build)
-  - [Built with Eleventy Excellent](#built-with-eleventy-excellent)
-  - [Logbook](#logbook)
-    - [22-12-20](#22-12-20)
-    - [22-12-13](#22-12-13)
-    - [22-12-12](#22-12-12)
-    - [22-11-24](#22-11-24)
-    - [22-11-04](#22-11-04)
-    - [22-10-30](#22-10-30)
-    - [22-10-04](#22-10-04)
-    - [22-10-03](#22-10-03)
-  - [Credits and Thank yous](#credits-and-thank-yous)
+* [Want a more generic/detailed getting started guide?](https://www.11ty.dev/docs/getting-started/)
 
-## Preview
+1. Make a directory and navigate to it:
 
-https://eleventy-excellent.netlify.app/
+```
+mkdir my-blog-name
+cd my-blog-name
+```
 
-## Features
+2. Clone this Repository
 
-**This starter includes:**
+```
+git clone https://github.com/11ty/eleventy-base-blog.git .
+```
 
-- The whole CSS workflow as suggested by buildexcellentwebsit.es
-- Accessible site navigation, editable in `src/_data/navigation.js`
-- Image optimization with Eleventy-img _([see blog post](https://eleventy-excellent.netlify.app/blog/post-with-an-image/))_
-- Youtube embed with lite-youtube _([see blog post](https://eleventy-excellent.netlify.app/blog/post-with-a-video/))_
-- Easy resource fetching with eleventy-fetch _([see blog post](https://eleventy-excellent.netlify.app/blog/post-with-fetched-content/))_
-- Syntax highlighting via eleventy-plugin-syntaxhighlight _([see blog post](https://eleventy-excellent.netlify.app/blog/post-with-some-code/))_
-- Advanced markdown handling _([see blog post](https://eleventy-excellent.netlify.app/blog/post-with-all-the-markdown/))_
-- 301 redirects for Netlify _([see blog post](https://eleventy-excellent.netlify.app/blog/post-with-301-redirects/))_
-- SEO basics (XML-sitemap, metadata)
-- dayjs handling dates & times
-- Bundling via esbuild
-- RSS feed
-- Links to social networks in footer
-- Mastodon domain verification snippet
+_Optional:_ Review `eleventy.config.js` and `_data/metadata.js` to configure the site’s options and data.
 
-## First steps
-
-- **Important:** edit meta data in `src/_data/meta.js`, it's being used all over the template.
-- Search for 'eleventy-excellent.netlify.app'. You'll find an entry in `src/assets/css/global/global-styles.css`. Replace with your own domain.
-- Edit your social media in `src/_data/social.js` and `src/_includes/icons`. If you add new icons they must be prefixed with "social-". By default you have rss, mastodon, twitter, ko-fi, linkedin and github. Great resource: https://lucide.dev/
-- Not required, but recommended: Delete `github.js` in `src/_data/github.js` and the blog posts, as these serve only as an example.
-- Edit your preferences (colors, fluid text sizes etc.) in `src/assets/css/design-tokens`.
-- Optional: set your (favicon) icons in `src/assets/images/favicon`.
-
-## Deploy directly to Netlify
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/madrilene/eleventy-excellent)
-
-## Development
-
-### Install dependencies
+3. Install dependencies
 
 ```
 npm install
 ```
 
-### Working locally
+4. Run Eleventy
 
-Starts watch tasks to compile when changes detected
-
-```
-npm start
-```
-
-### Creating a production build
-
-Minify JS, inline and minify CSS.
+Generate a production-ready build to the `_site` folder:
 
 ```
-npm run build
+npx @11ty/eleventy
 ```
 
-## Built with Eleventy Excellent
+Or build and host on a local development server:
 
-- [stephenanfield.com](https://stephenanfield.com/)
-- [krgr.dev](https://krgr.dev/)
-- [lenesaile.com](https://www.lenesaile.com/)
+```
+npx @11ty/eleventy --serve
+```
 
-## Logbook
+Or you can run [debug mode](https://www.11ty.dev/docs/debugging/) to see all the internals.
 
-### 22-12-20
+## Features
 
-- Andy now links to his mastodon profile
-- Linked blog posts in readme
+- Using [Eleventy v3](https://github.com/11ty/eleventy/releases/tag/v3.0.0) with zero-JavaScript output.
+	- Content is exclusively pre-rendered (this is a static site).
+	- Can easily [deploy to a subfolder without changing any content](https://www.11ty.dev/docs/plugins/html-base/)
+	- All URLs are decoupled from the content’s location on the file system.
+	- Configure templates via the [Eleventy Data Cascade](https://www.11ty.dev/docs/data-cascade/)
+- **Performance focused**: four-hundos Lighthouse score out of the box!
+	- _0 Cumulative Layout Shift_
+	- _0ms Total Blocking Time_
+- Local development live reload provided by [Eleventy Dev Server](https://www.11ty.dev/docs/dev-server/).
+- Content-driven [navigation menu](https://www.11ty.dev/docs/plugins/navigation/)
+- Fully automated [Image optimization](https://www.11ty.dev/docs/plugins/image/)
+	- Zero-JavaScript output.
+	- Support for modern image formats automatically (e.g. AVIF and WebP)
+	- Processes images on-request during `--serve` for speedy local builds.
+	- Prefers `<img>` markup if possible (single image format) but switches automatically to `<picture>` for multiple image formats.
+	- Automated `<picture>` syntax markup with `srcset` and optional `sizes`
+	- Includes `width`/`height` attributes to avoid [content layout shift](https://web.dev/cls/).
+	- Includes `loading="lazy"` for native lazy loading without JavaScript.
+	- Includes [`decoding="async"`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/decoding)
+	- Images can be co-located with blog post files.
+- Per page CSS bundles [via `eleventy-plugin-bundle`](https://github.com/11ty/eleventy-plugin-bundle).
+- Built-in [syntax highlighter](https://www.11ty.dev/docs/plugins/syntaxhighlight/) (zero-JavaScript output).
+- Draft content: use `draft: true` to mark any template as a draft. Drafts are **only** included during `--serve`/`--watch` and are excluded from full builds. This is driven by the `addPreprocessor` configuration API in `eleventy.config.js`. Schema validator will show an error if non-boolean value is set in data cascade.
+- Blog Posts
+	- Automated next/previous links
+	- Accessible deep links to headings
+- Generated Pages
+	- Home, Archive, and About pages.
+	- [Atom feed included (with easy one-line swap to use RSS or JSON)](https://www.11ty.dev/docs/plugins/rss/)
+	- `sitemap.xml`
+	- Zero-maintenance tag pages ([View on the Demo](https://eleventy-base-blog.netlify.app/tags/))
+	- Content not found (404) page
 
-### 22-12-13
+## Demos
 
-- added JS and CSS as as first-class citizens in Eleventy, out of the npm scripts.
-- imported htmlmin transform, css and js processing with `eleventyConfig.addPlugin(require("other-config-file.js"))`, see https://front-end.social/@eleventy@fosstodon.org/109501433721579265
+- [Netlify](https://eleventy-base-blog.netlify.app/)
+- [Vercel](https://demo-base-blog.11ty.dev/)
+- [Cloudflare Pages](https://eleventy-base-blog-d2a.pages.dev/)
+- [GitHub Pages](https://11ty.github.io/eleventy-base-blog/)
 
-### 22-12-12
+## Deploy this to your own site
 
-- updated head structure for better performance
-- added "built with this" section in readme
-- added note for internal links in markdown blog post
-- adding page based preload option, making preload of monospaced font in posts default to avoid CLS
+Deploy this Eleventy site in just a few clicks on these services:
 
-### 22-11-24
+- Read more about [Deploying an Eleventy project](https://www.11ty.dev/docs/deployment/) to the web.
+- [Deploy this to **Netlify**](https://app.netlify.com/start/deploy?repository=https://github.com/11ty/eleventy-base-blog)
+- [Deploy this to **Vercel**](https://vercel.com/import/project?template=11ty%2Feleventy-base-blog)
+- Look in `.github/workflows/gh-pages.yml.sample` for information on [Deploying to **GitHub Pages**](https://www.11ty.dev/docs/deployment/#deploy-an-eleventy-project-to-git-hub-pages).
+- [Try it out on **Stackblitz**](https://stackblitz.com/github/11ty/eleventy-base-blog)
 
-- updated required node version in package.json
-- meta.js now controls most of the templates defaults
-- added RSS feed, because of course!!
-- made twitter and other meta data OPTIONAL
-- added Mastodon verification and more social icon defaults
-- focus-within for the cards
+### Implementation Notes
 
-### 22-11-04
+- `content/about/index.md` is an example of a content page.
+- `content/blog/` has the blog posts but really they can live in any directory. They need only the `posts` tag to be included in the blog posts [collection](https://www.11ty.dev/docs/collections/).
+- Use the `eleventyNavigation` key (via the [Eleventy Navigation plugin](https://www.11ty.dev/docs/plugins/navigation/)) in your front matter to add a template to the top level site navigation. This is in use on `content/index.njk` and `content/about/index.md`.
+- Content can be in _any template format_ (blog posts needn’t exclusively be markdown, for example). Configure your project’s supported templates in `eleventy.config.js` -> `templateFormats`.
+- The `public` folder in your input directory will be copied to the output folder (via `addPassthroughCopy` in the `eleventy.config.js` file). This means `./public/css/*` will live at `./_site/css/*` after your build completes.
+- This project uses three [Eleventy Layouts](https://www.11ty.dev/docs/layouts/):
+	- `_includes/layouts/base.njk`: the top level HTML structure
+	- `_includes/layouts/home.njk`: the home page template (wrapped into `base.njk`)
+	- `_includes/layouts/post.njk`: the blog post template (wrapped into `base.njk`)
+- `_includes/postslist.njk` is a Nunjucks include and is a reusable component used to display a list of all the posts. `content/index.njk` has an example of how to use it.
 
-- added blog posts for feature explanation
+#### Content Security Policy
 
-### 22-10-30
+If your site enforces a [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) (as public-facing sites should), you have a few choices (pick one):
 
-- WebC in own branch
-- simplify main branch
-
-### 22-10-04
-
-- all markdown syntax set
-
-### 22-10-03
-
-- first commit. Updated
-
-## Credits and Thank yous
-
-**Andy Bell**
-
-His CSS methodology "CUBE" makes sense to me. It goes hand in hand with _Every Layout_ (which he co-authors). He has recently published an approach that incorporates Tailwind CSS into his methodology. Also, I learned how to use Eleventy in 2020 with his (now free) course.
-
-- https://cube.fyi/
-- https://buildexcellentwebsit.es/
-- https://learneleventyfromscratch.com/
-
-**Heydon Pickering**
-
-I strongly orientate myself on Heydon's approaches and really love his books.
-
-- https://every-layout.dev/
-- https://inclusive-components.design/
-
-**Zach Leatherman**
-
-He is developing Eleventy and is constantly making it even better!
-
-- https://www.11ty.dev/
-- https://www.zachleat.com/
-
-**Stephanie Eckles**
-
-Stephanie provides a lot of resources for Eleventy and modern CSS.
-
-- https://smolcss.dev/
-- https://moderncss.dev/
-
-**Aleksandr Hovhannisyan**
-
-I love order and structure. Aleksandr does this in an exemplary way, which is why I based the structure of eleventy.js on his personal site. The 301 redirect solution I'm using is from his blog.
-
-- https://github.com/AleksandrHovhannisyan
-- https://www.aleksandrhovhannisyan.com/blog/eleventy-netlify-redirects/
-
-**Manuel Matuzović**
-
-Manuel is an accessibility expert. The menu I'm using is from one of his articles on web.dev.
-
-- https://web.dev/website-navigation/
-- https://www.matuzo.at/
+1. In `base.njk`, remove `<style>{% getBundle "css" %}</style>` and uncomment `<link rel="stylesheet" href="{% getBundleFileUrl "css" %}">`
+2. Configure the server with the CSP directive `style-src: 'unsafe-inline'` (less secure).

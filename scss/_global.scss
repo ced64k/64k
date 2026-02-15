@@ -1,0 +1,103 @@
+@use 'variables' as *;
+
+/* Hide aria-hidden elements */
+[aria-hidden="true"] {
+  display: none !important;
+}
+
+/* Global variables */
+:root {
+  --color-dark: #{$color-dark};
+  --gutter: #{$gutter};
+  --border-radius: #{$border-radius};
+  --transition-base: #{$transition-base};
+  --transition-movement: #{$transition-movement};
+  --transition-fade: #{$transition-fade};
+  --transition-bounce: #{$transition-bounce};
+  --tracking: #{$tracking};
+  --tracking-s: #{$tracking-s};
+  --font-display: #{$font-display};
+  --font-base: #{$font-base};
+  --green: #{$green};
+  --font-mono: #{$font-family-monospace};
+}
+
+/* Global styles */
+body {
+  color: $color-dark;
+  background: $background-color-dark;
+  font-size: 18px;
+  font-family: $font-base;
+  line-height: 1.4;
+  letter-spacing: $tracking;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  transition: all 0.4s;
+  
+  &.fixed {
+    padding-top: 0;
+  }
+}
+
+/* Base typesetting */
+h1,
+h2,
+h3 {
+  line-height: 1;
+  letter-spacing: $tracking-s;
+  font-family: $font-display;
+}
+
+h1 {
+  position: relative;
+  padding: 0px 30px 30px;
+  margin: 30px -30px 20px !important;
+  text-align: left;
+  color: $green;
+  letter-spacing: -1px;
+  font-weight: 600;
+  font-size: 36px !important;
+  
+  @media only screen and (min-width: 992px) {
+    font-size: 60px !important;
+    margin: 30px -30px 20px !important;
+  }
+}
+
+h2 {
+  font-size: 32px; 
+  a {
+    color: #BEC32D;
+    text-decoration: none;
+  }
+}
+
+h3 {
+  font-size: 30px;
+  position: relative;
+  padding: 0 0 10px;
+  color: $green;
+  
+  a {
+    text-decoration: none;
+  }
+}
+
+/* Links */
+a {
+  color: currentcolor;
+  
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+p a {
+  color: var(--green);
+}
+
+/* Selection */
+::selection {
+  background: var(--color-dark);
+  color: var(--color-light);
+}
