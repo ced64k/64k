@@ -94,8 +94,8 @@ nav.navbar {
   display: block;
   
   ul {
-    background: var(--nav-list-background, #fff);
-    box-shadow: var(--nav-list-shadow, -5px 0 11px 0 rgba(0, 0, 0, 0.2));
+    //background: var(--nav-list-background, #fff);
+    //box-shadow: var(--nav-list-shadow, -5px 0 11px 0 rgba(0, 0, 0, 0.2));
     display: flex;
     flex-direction: var(--nav-list-layout, column);
     flex-wrap: wrap;
@@ -157,6 +157,12 @@ nav.navbar {
   
   [aria-expanded="true"] svg {
     transform: var(--nav-list-rotate, rotate(45deg));
+  }
+}
+
+@media (max-width: 767px) {
+  nav.navbar {
+    display: none;
   }
 }
 
