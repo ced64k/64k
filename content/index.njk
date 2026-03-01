@@ -16,7 +16,7 @@ eleventyNavigation:
 			{%- if lastpost.data.featured %}
 			{%- set lastpostImage = lastpost | getFeaturedImagePath %}
 			<div class="featured">
-				<img src="{{ lastpostImage }}" alt="{{ lastpost.data.title }}" loading="lazy" decoding="async">
+				<img src="{{ lastpostImage }}" alt="{{ lastpost.data.title }}" loading="lazy" decoding="async" sizes="100vw">
 			</div>
 			{%- endif %}
 			<div class="txt">
@@ -42,129 +42,53 @@ eleventyNavigation:
 	</div>
 	{%- endif %}
 
-	<div class="masonry" role="list" style="--item-width:350px">
+	<div class="posts-wrapper">
 		{%- set postsList = collections.posts | reverse | head(7) %}
 		{%- for post in postsList %}
 		{%- if loop.index0 > 0 %}
-		<div class="card" style="--span:1">
-			<div class="card_inner">
-				{%- if post.data.featured %}
-				{%- set postImage = post | getFeaturedImagePath %}
-				<div class="featured">
-					<img src="{{ postImage }}" alt="{{ post.data.title }}" loading="lazy" decoding="async">
-				</div>
-				{%- endif %}
-				<div class="txt">
-					<h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
-					<div class="meta">
-						{%- if post.data.author %}
-						<div class="author">{{ post.data.author }}</div>
+		{%- set cardIndex = loop.index0 - 1 %}
+		{%- if cardIndex % 3 === 0 %}
+		<div class="posts-row">
+		{%- endif %}
+			<div class="card">
+				<div class="card_inner">
+					{%- if post.data.featured %}
+					{%- set postImage = post | getFeaturedImagePath %}
+					<div class="featured">
+						<img src="{{ postImage }}" alt="{{ post.data.title }}" loading="lazy" decoding="async">
+					</div>
+					{%- endif %}
+					<div class="txt">
+						<h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+						<div class="meta">
+							{%- if post.data.author %}
+							<div class="author">{{ post.data.author }}</div>
+							{%- endif %}
+							<div class="date">{{ post.data.date | readableDate("dd MMMM yyyy") }}</div>
+						</div>
+					{%- if post.data.excerpt %}
+					<div class="excerpt">{{ post.data.excerpt | safe }}</div>
 						{%- endif %}
-						<div class="date">{{ post.data.date | readableDate("dd MMMM yyyy") }}</div>
+						{%- if post.data.tags %}
+						<div class="tag_wrapper">
+							{%- for tag in post.data.tags | filterTagList %}
+							<a href="/tags/{{ tag | slugify }}/" class="tag">{{ tag }}</a>
+							{%- endfor %}
+						</div>
+						{%- endif %}
 					</div>
-				{%- if post.data.excerpt %}
-				<div class="excerpt">{{ post.data.excerpt | safe }}</div>
-					{%- endif %}
-					{%- if post.data.tags %}
-					<div class="tag_wrapper">
-						{%- for tag in post.data.tags | filterTagList %}
-						<a href="/tags/{{ tag | slugify }}/" class="tag">{{ tag }}</a>
-						{%- endfor %}
-					</div>
-					{%- endif %}
 				</div>
 			</div>
+		{%- if cardIndex % 3 === 2 or loop.last %}
 		</div>
+		{%- endif %}
 		{%- endif %}
 		{%- endfor %}
 	</div>
 </article>
 
 <script>
-	// Show loader by default
+	// Hide loader
 	const pageLoader = document.querySelector('.page-loader');
-	
-	// CSS Grid Masonry Polyfill
-	const masonryLayouts = document.querySelectorAll('.masonry');
-
-	function isMasonrySupported(container) {
-		if (typeof window === 'undefined') return;
-		return getComputedStyle(container).gridTemplateRows === 'masonry';
-	}
-
-	function getChildren(container) {
-		let children = container.children;
-		// Compensate for Astro Slots
-		if (children[0]?.nodeName === 'ASTRO-SLOT') children = children[0].children;
-		return Array.from(children);
-	}
-
-	async function areImagesLoaded(container) {
-		const images = Array.from(container.querySelectorAll('img'));
-		const promises = images.map(img => {
-			return new Promise((resolve, reject) => {
-				if (img.complete) return resolve();
-				img.onload = resolve;
-				img.onerror = reject;
-			});
-		});
-		return Promise.all(promises);
-	}
-
-	function areVideosLoaded(container) {
-		const videos = Array.from(container.querySelectorAll('video'));
-		const promises = videos.map(video => {
-			return new Promise((resolve, reject) => {
-				if (video.readyState === 4) return resolve(); // HAVE_ENOUGH_DATA
-				video.onloadedmetadata = resolve;
-				video.onerror = reject;
-			});
-		});
-		return Promise.all(promises);
-	}
-
-	function layout({colGap, items}) {
-		items.forEach(item => {
-			const ib = item.getBoundingClientRect();
-			item.style.gridRowEnd = `span ${Math.round(ib.height + colGap)}`;
-		});
-	}
-
-	// Initialize masonry layouts
-	async function initMasonry() {
-		const promises = Array.from(masonryLayouts).map(async container => {
-			if (isMasonrySupported(container)) {
-				return Promise.resolve();
-			}
-
-			const colGap = parseFloat(getComputedStyle(container).columnGap);
-			const items = getChildren(container);
-
-			container.style.gridAutoRows = '0px';
-			container.style.setProperty('row-gap', '1px', 'important');
-			
-			try {
-				await Promise.all([areImagesLoaded(container), areVideosLoaded(container)]);
-			} catch(e) {}
-			
-			layout({colGap, items});
-			
-			const observer = new ResizeObserver(() => {
-				layout({colGap, items});
-			});
-			observer.observe(container);
-		});
-
-		await Promise.all(promises);
-		
-		// Hide loader when masonry is ready
-		setTimeout(() => {
-			if (pageLoader) {
-				pageLoader.classList.add('loaded');
-			}
-		}, 100);
-	}
-
-	// Start initialization
-	initMasonry();
+	if (pageLoader) pageLoader.classList.add('loaded');
 </script>

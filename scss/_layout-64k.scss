@@ -1,8 +1,12 @@
 @use 'variables' as *;
 
 #main {
-  max-width: 1360px;
+  max-width: 100%;
   margin: 0 auto;
+  padding-top: var(--header-height, 148px);
+  padding-left: 0;
+  padding-right: 0;
+  transition: padding-top 0.3s ease-in-out;
 }
 
 .main_inner {
@@ -27,7 +31,6 @@
 }
 
 .region {
-  //padding-top: var(--region-space-top, 30px);
   padding-bottom: var(--region-space-bottom, 30px);
 }
 

@@ -16,6 +16,13 @@ $background-color-dark: #181818;
 $gutter: 60px;
 $border-radius: 0.5rem;
 
+// Typed CSS custom property — enables transition on --header-height
+@property --header-height {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 93px;
+}
+
 // Transitions
 $transition-base: 250ms ease;
 $transition-movement: 200ms linear;

@@ -93,7 +93,7 @@ export default async function(eleventyConfig) {
 		// Output formats for each image.
 		formats: ["avif", "webp", "auto"],
 
-		widths: [900],
+		widths: [500, 900, 1200, 1600, 2000],
 
 		failOnError: false,
 		htmlOptions: {
@@ -107,6 +107,57 @@ export default async function(eleventyConfig) {
 		sharpOptions: {
 			animated: true,
 		},
+	});
+
+	// Shortcode for featured images in post detail (hero)
+	// Uses this.page.inputPath to resolve the image relative to the source markdown file
+	eleventyConfig.addAsyncShortcode("featuredImage", async function(src, alt) {
+		if (!src) {
+			return '';
+		}
+
+		const Image = (await import("@11ty/eleventy-img")).default;
+		const path = await import("path");
+
+		// Resolve image path relative to the page's source file
+		let imagePath;
+		if (src.startsWith('http')) {
+			imagePath = src;
+		} else if (src.startsWith('/')) {
+			imagePath = `.${src}`;
+		} else {
+			// Relative path: resolve from the page's input file directory
+			const inputDir = path.dirname(this.page.inputPath);
+			imagePath = path.join(inputDir, src).replace(/\\/g, '/');
+		}
+
+		try {
+			const metadata = await Image(imagePath, {
+				widths: [800, 1200, 1600, 2000],
+				formats: ["avif", "webp", "jpeg"],
+				outputDir: "./_site/img/optimized/",
+				urlPath: "/img/optimized/",
+				failOnError: false,
+			});
+
+			const imageAttributes = {
+				alt,
+				sizes: "100vw",
+				loading: "eager",
+				decoding: "async",
+			};
+
+			return Image.generateHTML(metadata, imageAttributes);
+		} catch (err) {
+			console.error(`Error processing featured image ${imagePath}:`, err.message);
+			// Fallback: use passthrough copy URL
+			const urlParts = (this.page.url || '').split('/').filter(p => p);
+			if (urlParts.length >= 3) {
+				const datePath = urlParts.slice(0, 3).join('/');
+				return `<img src="/blog/${datePath}/${src}" alt="${alt}" loading="eager" decoding="async">`;
+			}
+			return `<img src="${src}" alt="${alt}" loading="eager" decoding="async">`;
+		}
 	});
 
 	// Shortcode for responsive images in cards

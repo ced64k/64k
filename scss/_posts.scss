@@ -1,33 +1,95 @@
 @use 'variables' as *;
 @use 'sass:color';
 
+/* Post title section (centered) */
+.post-title-section {
+	text-align: center;
+	padding: 2rem 1.5rem 1rem;
+	max-width: 1200px;
+	margin: 0 auto;
+	
+	@media only screen and (min-width: 768px) {
+		padding: 3rem 2rem 1.5rem;
+	}
+	
+	h1 {
+		color: $green;
+		font-size: 28px;
+		margin: 0 0 20px 0;
+		text-align: center;
+		
+		@media only screen and (min-width: 768px) {
+			font-size: 36px;
+		}
+		
+		@media only screen and (min-width: 992px) {
+			font-size: 48px;
+		}
+	}
+	
+	.meta {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 15px;
+		flex-wrap: wrap;
+		font-family: $font-display;
+		font-weight: 600;
+		
+		.author,
+		.date {
+			font-size: 14px;
+			
+			@media only screen and (min-width: 768px) {
+				font-size: 16px;
+			}
+		}
+	}
+}
+
+/* Post featured image (max 1440px) */
+.post-featured-image {
+	max-width: 1440px;
+	max-height: 400px;
+	margin: 0 auto 2rem;
+	width: 100%;
+	overflow: hidden;
+	
+	img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		max-height: 400px;
+		object-fit: cover;
+		object-position: center;
+	}
+}
+
 /* Post hero (full-width panoramic header) */
 .post-hero {
 	position: relative;
-	width: 99.5vw;
+	width: 100%;
 	left: 50%;
 	right: 50%;
-	margin-left: -50vw;
-	margin-right: -50vw;
-	max-width: 100vw;
-	height: 300px;
+	margin-left: -50%;
+	margin-right: -50%;
 	overflow: hidden;
 	margin-bottom: 2rem;
 	
-	@media only screen and (min-width: 768px) {
-		height: 400px;
-	}
-	
-	@media only screen and (min-width: 992px) {
-		height: 500px;
-	}
-	
 	.post-hero-image {
 		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
+		top: -15%;
+		left: -5%;
+		width: 110%;
+		height: 130%;
+		overflow: hidden;
+		
+		@media only screen and (min-width: 768px) {
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
 		
 		img {
 			display: block;
@@ -49,21 +111,52 @@
 	}
 	
 	.post-hero-content {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		width: 90%;
-		max-width: 1200px;
-		text-align: center;
+		position: relative;
 		z-index: 1;
-		padding: 20px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		padding: 2rem 1.5rem;
+		width: 100%;
+		max-width: 1200px;
+		margin: 0 auto;
+		min-height: 400px;
+		
+		@media only screen and (min-width: 768px) {
+			padding: 3rem 2rem;
+			min-height: 450px;
+		}
+		
+		@media only screen and (min-width: 992px) {
+			padding: 4rem 2.5rem;
+			min-height: 500px;
+		}
+		
+		.tag_wrapper {
+			display: flex;
+			justify-content: center;
+			flex-wrap: wrap;
+			gap: 8px;
+			margin-bottom: 1rem;
+			
+			.tag {
+				&:hover {
+					background: color.adjust($green, $lightness: 10%);
+					transform: translateY(-2px);
+				}
+			}
+		}
 		
 		h1 {
 			color: $green;
 			font-size: 28px;
-			margin: 0 0 15px 0;
+			margin: 0;
 			text-align: center;
+			flex: 1;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 1rem 0;
 			
 			@media only screen and (min-width: 768px) {
 				font-size: 36px;
@@ -80,7 +173,7 @@
 			align-items: center;
 			gap: 15px;
 			flex-wrap: wrap;
-			margin-bottom: 15px;
+			margin-top: 1rem;
 			
 			.author,
 			.date {
@@ -91,22 +184,6 @@
 				
 				@media only screen and (min-width: 768px) {
 					font-size: 16px;
-				}
-			}
-		}
-		
-		.tag_wrapper {
-			display: flex;
-			justify-content: center;
-			flex-wrap: wrap;
-			gap: 8px;
-			
-			.tag {
-
-				
-				&:hover {
-					background: color.adjust($green, $lightness: 10%);
-					transform: translateY(-2px);
 				}
 			}
 		}
@@ -268,49 +345,50 @@
 	}
 }
 
-/* Post layout with sidebar */
+/* Post layout */
 .post-layout {
 	display: flex;
 	flex-direction: column;
-	gap: 2rem;
+	max-width: 780px;
+	margin: 0 auto;
+	padding: 0 1.5rem;
 	
-	@media only screen and (min-width: 992px) {
-		flex-direction: row;
-		align-items: flex-start;
+	@media only screen and (min-width: 768px) {
+		padding: 0 2rem;
 	}
 }
 
 .post-content-main {
-	flex: 1;
-	min-width: 0;
-	
-	@media only screen and (min-width: 992px) {
-		max-width: calc(100% - 350px);
-	}
+	width: 100%;
 }
 
-/* Related posts sidebar */
+/* Related posts section */
 .related-posts {
-	flex-shrink: 0;
 	width: 100%;
-	
-	@media only screen and (min-width: 992px) {
-		width: 320px;
-		position: sticky;
-		top: 2rem;
-	}
+	margin-top: 3rem;
+	padding-top: 2rem;
+	border-top: 2px solid rgba(255, 255, 255, 0.1);
 	
 	h3 {
 		font-size: 1.5rem;
-		margin-bottom: 1rem;
-		color: var(--text-color);
+		margin-bottom: 1.5rem;
+		color: $green;
+		text-align: center;
+		
+		@media only screen and (min-width: 768px) {
+			font-size: 1.8rem;
+		}
 	}
 }
 
 .related-posts-grid {
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1.5rem;
+	
+	@media only screen and (min-width: 768px) {
+		grid-template-columns: repeat(3, 1fr);
+	}
 }
 
 /* Small card variant for related posts */
@@ -318,6 +396,13 @@
 	.card_inner {
 		background: #242424;
 		min-height: auto;
+		border-top-left-radius: 20px;
+		overflow: hidden;
+		transition: transform 0.3s ease;
+		
+		&:hover {
+			transform: translateY(-4px);
+		}
 	}
 	
 	.featured {
@@ -377,6 +462,11 @@
 	p {
 		margin: 0 0 1em;
 		line-height: 1.6;
+	}
+	
+	img {
+		height: auto;
+		max-width: 100%;
 	}
 }
 

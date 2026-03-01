@@ -1,13 +1,15 @@
 @use 'variables' as *;
 
 .header {
+  position: fixed;
   z-index: 10000;
-  height: 148px;
+  height: var(--header-height, 93px);
   width: 100%;
-  transition: all 0.4s;
+  transition: all 0.3s ease-in-out;
   top: 0;
   left: 0;
   border-bottom: 1px solid transparent;
+  background-color: transparent;
   
   @media only screen and (min-width: 992px) {
     padding: 0 0 0;
@@ -24,8 +26,8 @@
   position: relative;
   
   .wrapper {
-    max-width: 1360px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
     padding-left: 30px;
     padding-right: 30px;
     display: flex;
@@ -40,18 +42,18 @@
   gap: 8px;
 }
 
-.fixed .header {
-  height: 40px;
-  overflow: hidden;
-  padding: 5px;
-  border-bottom-color: rgba(255, 255, 255, 0.05);
+.header.scrolled {
+  height: 69px;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom-color: rgba(255, 255, 255, 0.15);
   
   .logo {
     padding-top: 0;
     
     svg {
-      height: 30px;
-      width: 63px;
+      height: auto;
+      width: 54px;
     }
   }
 }
@@ -62,14 +64,6 @@
 }
 
 .logo {
-  font-weight: bold;
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  letter-spacing: -0.08rem;
-  padding: 30px 0 0;
-  
   svg {
     width: 66px;
     height: 31px;
@@ -77,8 +71,8 @@
     bottom: 0;
     
     @media only screen and (min-width: 992px) {
-      width: 120px;
-      height: 58px;
+      width: 80px;
+      height: auto;
     }
   }
 }
@@ -91,7 +85,7 @@
 nav.navbar {
   position: var(--nav-position, absolute);
   inset-inline-end: 0.1rem;
-  display: block;
+  display: flex;
   
   ul {
     //background: var(--nav-list-background, #fff);
@@ -102,7 +96,7 @@ nav.navbar {
     gap: 0.9rem;
     height: var(--nav-list-height, 100vh);
     list-style: none;
-    margin: 0;
+    margin: auto 0;
     padding: var(--nav-list-padding, 2rem);
     position: var(--nav-list-position, fixed);
     inset-block-start: 0;
@@ -195,5 +189,41 @@ nav.navbar {
   nav.navbar [aria-expanded="true"] + ul,
   nav.navbar svg {
     transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), visibility 0.05s linear;
+  }
+}
+
+
+.header {
+        background-color: rgba(0, 0, 0, 0.8);
+          backdrop-filter: blur(10px);
+  position: fixed;
+  display: flex;
+  padding: 20px;
+  z-index: 1000;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+  .logo {
+    svg {
+      width: 110px;
+      height: auto;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+  .navbar {
+    margin-left: auto;
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+  &.scrolled {
+      background-color: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        border-bottom-color: rgba(255, 255, 255, 0.15);
+      .logonew {
+          svg {
+            width: 80px;
+          }
+        }
   }
 }

@@ -17,68 +17,46 @@
 	<script type="module">{% include "node_modules/@zachleat/heading-anchors/heading-anchors.js" %}</script>
 </head>
 <body>
+
 	<a href="#main" class="skip-link">Skip to content</a>
-	
-	<header class="header" role="banner">
-		<div class="header__inner">
-			<div class="wrapper">
-				<div class="header-left">
-					<a href="/" class="logo | no-underline"{% if page.url == '/' %} aria-current="page"{% endif %}>
-						<svg id="a" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 361.9 172.67">
-							<polygon points="361.9 0 307.5 0 235.04 72.46 235.04 0 196.58 0 196.58 1.45 195.76 .63 102.5 93.9 101.82 93.9 101.82 94.57 101.82 132.36 118.43 132.36 187.32 132.36 187.32 93.9 156.89 93.9 196.58 54.21 196.58 110.92 196.26 111.25 196.58 111.57 196.58 170.67 235.04 170.67 235.04 126.85 247.21 114.68 303.2 170.67 357.59 170.67 274.41 87.49 361.9 0" style="fill:#fff;"/>
-							<path d="m95.6,50.43l-31.34,31.34c.23,0,.47-.02.7-.02,14.31,0,25.96,11.64,25.96,25.96s-11.64,25.96-25.96,25.96-25.96-11.64-25.96-25.96c0-6.96,2.76-13.29,7.24-17.96l-.1-.1L135.8,0h-54.68L22.84,58.28C9.45,70.79,0,87.91,0,107.71c0,35.87,29.08,64.96,64.96,64.96s64.96-29.08,64.96-64.96c0-24.79-13.89-46.33-34.32-57.28Z" style="fill:#fff;"/>
-						</svg>
-					</a>
-					<div class="sitename">64K</div>
-				</div>
-				
-				<nav id="mainnav" class="navbar">
-					<ul>
-						<li><a href="/about/"{% if page.url == '/about/' %} aria-current="page"{% endif %}>À Propos</a></li>
-						<li><a href="/archives/"{% if page.url == '/archives/' %} aria-current="page"{% endif %}>Archives</a></li>
-						<li><a href="/contact/"{% if page.url == '/contact/' %} aria-current="page"{% endif %}>Contact</a></li>
-					</ul>
-				</nav>
-				
-				<template id="burger-template">
-					<button type="button" aria-expanded="false" aria-label="Menu" aria-controls="mainnav">
-						<span>Menu</span>
-						<svg width="24" height="24" aria-hidden="true">
-							<path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd"/>
-						</svg>
-					</button>
-				</template>
-			</div>
-		</div>
-	</header>
+
+	<div class="header">
+		<a href="/" class="logo | no-underline"{% if page.url == '/' %} aria-current="page"{% endif %}>
+			<svg id="anew" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 361.9 172.67">
+				<polygon points="361.9 0 307.5 0 235.04 72.46 235.04 0 196.58 0 196.58 1.45 195.76 .63 102.5 93.9 101.82 93.9 101.82 94.57 101.82 132.36 118.43 132.36 187.32 132.36 187.32 93.9 156.89 93.9 196.58 54.21 196.58 110.92 196.26 111.25 196.58 111.57 196.58 170.67 235.04 170.67 235.04 126.85 247.21 114.68 303.2 170.67 357.59 170.67 274.41 87.49 361.9 0" style="fill:#fff;"/>
+				<path d="m95.6,50.43l-31.34,31.34c.23,0,.47-.02.7-.02,14.31,0,25.96,11.64,25.96,25.96s-11.64,25.96-25.96,25.96-25.96-11.64-25.96-25.96c0-6.96,2.76-13.29,7.24-17.96l-.1-.1L135.8,0h-54.68L22.84,58.28C9.45,70.79,0,87.91,0,107.71c0,35.87,29.08,64.96,64.96,64.96s64.96-29.08,64.96-64.96c0-24.79-13.89-46.33-34.32-57.28Z" style="fill:#fff;"/>
+			</svg>
+		</a>
+		<nav id="mainnav" class="navbar">
+			<ul>
+				<li><a href="/about/"{% if page.url == '/about/' %} aria-current="page"{% endif %}>À Propos</a></li>
+				<li><a href="/archives/"{% if page.url == '/archives/' %} aria-current="page"{% endif %}>Archives</a></li>
+				<li><a href="/contact/"{% if page.url == '/contact/' %} aria-current="page"{% endif %}>Contact</a></li>
+			</ul>
+		</nav>
+	</div>
+
+
 
 	<main id="main" class="flow">
 		{%- if hasHero %}
-		<div class="post-hero{% if not featured %} post-hero-no-image{% endif %}">
-			{%- if featured %}
-			{%- set postData = { data: { featured: featured }, url: page.url } %}
-			{%- set featuredImage = postData | getFeaturedImagePath %}
-			<div class="post-hero-image">
-				<img src="{{ featuredImage }}" alt="{{ title }}" loading="eager" decoding="async">
-			</div>
-			{%- endif %}
-			<div class="post-hero-content">
-				<h1>{{ title }}</h1>
-				<div class="meta">
-					{%- if author %}
-					<div class="author">{{ author }}</div>
-					{%- endif %}
-					<div class="date">{{ page.date | readableDate("dd MMMM yyyy") }}</div>
-				</div>
-				{%- if tags | filterTagList | length > 0 %}
-				<div class="tag_wrapper">
-					{%- for tag in tags | filterTagList %}
-					<a href="/tags/{{ tag | slugify }}/" class="tag">{{ tag }}</a>
-					{%- endfor %}
-				</div>
+		{# Title and metadata section #}
+		<div class="post-title-section">
+			<h1>{{ title }}</h1>
+			<div class="meta">
+				{%- if author %}
+				<div class="author">{{ author }}</div>
 				{%- endif %}
+				<div class="date">{{ page.date | readableDate("dd MMMM yyyy") }}</div>
 			</div>
 		</div>
+		
+		{# Featured image section #}
+		{%- if featured %}
+		<div class="post-featured-image">
+			{% featuredImage featured, title %}
+		</div>
+		{%- endif %}
 		{%- endif %}
 		<div class="main_inner">
 			<heading-anchors>
@@ -99,5 +77,25 @@
 	
 	<!-- This page `{{ page.url }}` was built on {% currentBuildDate %} -->
 	<script type="module" src="{% getBundleFileUrl "js" %}"></script>
+	<script>
+		// Header scroll effect
+		const header = document.querySelector('.header');
+		const root = document.documentElement;
+		let lastScroll = 0;
+		
+		window.addEventListener('scroll', () => {
+			const currentScroll = window.pageYOffset;
+			
+			if (currentScroll > 50) {
+				header.classList.add('scrolled');
+				root.style.setProperty('--header-height', '70px');
+			} else {
+				header.classList.remove('scrolled');
+				root.style.setProperty('--header-height', '93px');
+			}
+			
+			lastScroll = currentScroll;
+		});
+	</script>
 </body>
 </html>
